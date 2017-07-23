@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mosquito.dao.CommentsDao">
+	<insert id="addComments">
+		<!-- ignore 主键冲突，报错 -->
+		INSERT ignore INTO comments (commentid, userid,commtime,content,category)
+		VALUES (#{commentid}, #{userid},#{commtime}, #{content}, #{category})
+	</insert>
+	<select id="getAllComments" resultType="Comments" >
+		SELECT 
+  			a.`id`,
+  			a.`commentid`,
+  			a.`userid`,
+  			b.`username`,
+  			b.`headpic`,
+  			a.`commtime`,
+  			a.`content`,
+  			a.`category` 
+		FROM
+  			`comments` a,
+  			`user` b
+		WHERE 
+			a.`userid`=b.`id`
+		ORDER BY
+			a.`commtime`
+	</select>
+	<select id="getCommentsById" resultType="Comments" parameterType="int">
+		SELECT 
+  			a.`id`,
+  			a.`commentid`,
+  			a.`userid`,
+  			b.`username`,
+  			b.`headpic`,
+  			a.`commtime`,
+  			a.`content`,
+  			a.`category` 
+		FROM
+  			`comments` a,
+  			`user` b
+		WHERE 
+			a.`userid`=b.`id` AND a.`commentid`=#{commentid}
+		ORDER BY
+			a.`commtime`
+	</select>
+	<delete id="deleteComments" parameterType="int">
+	DELETE 
+	FROM 
+		comments
+	WHERE
+		id=#{id}
+	</delete>
+</mapper>

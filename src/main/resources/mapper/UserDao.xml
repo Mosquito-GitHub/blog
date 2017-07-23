@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mosquito.dao.UserDao">
+	<!-- 目的：为dao接口方法提供sql语句配置 -->
+	<select id="getUserById" resultType="User" parameterType="int">
+		SELECT 
+  			`id`,
+  			`username`,
+  			`email`,
+  			`password`,
+  			`rule`,
+  			`headpic`,
+  			`selfintroduction` 
+		FROM
+  			`user` 
+		WHERE
+			id=#{id}
+	</select>
+	<select id="getUserByName" resultType="User" parameterType="string">
+		SELECT 
+  			`id`,
+  			`username`,
+  			`email`,
+  			`password`,
+  			`rule`,
+  			`headpic`,
+  			`selfintroduction` 
+		FROM
+  			`user` 
+		WHERE
+			username=#{userName}
+	</select>
+	<select id="getAllUser" resultType="User">
+		SELECT 
+  			`id`,
+  			`username`,
+  			`email`,
+  			`password`,
+  			`rule`,
+  			`headpic`,
+  			`selfintroduction` 
+		FROM
+  			`user`
+	</select>
+	<insert id="addUser">
+	INSERT ignore INTO
+	`user` (`username`,`email`,`password`,`rule`,`headpic`,`selfintroduction`) 
+	VALUES(#{username},#{email},#{password},#{rule},#{headpic},#{selfintroduction})
+	</insert>
+
+</mapper>

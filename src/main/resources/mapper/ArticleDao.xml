@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mosquito.dao.ArticleDao">
+	<!-- 目的：为dao接口方法提供sql语句配置getByName -->
+	<insert id="saveArticle">
+	INSERT ignore INTO 
+		article
+		(`author`,`title`,`modifytime`,`createtime`,`keyword`,`tags`,`context`,`abstractcontext`)
+	VALUES
+		(#{author},#{title},#{modifytime},#{createtime},#{keyword},#{tags},#{context},#{abstractcontext})
+	</insert>
+	<update id="updateArticle">
+	UPDATE 
+		article
+	SET
+		`title`=#{title},
+		`modifytime`=#{modifytime},
+		`keyword`=#{keyword},
+		`tags`=#{tags},
+		`context`=#{context},
+		`abstractcontext`=#{abstractcontext}
+	WHERE
+		id=#{id}
+	</update>
+	<select id="getById" resultType="Article" parameterType="int">
+		SELECT
+			id,
+			author,
+			title,
+			modifytime,
+			createtime,
+			keyword,
+			tags,
+			context,
+			abstractContext,
+			readnum
+		FROM
+			article
+		WHERE
+			id=#{articleId}
+	</select>
+	<select id="getByTitle" resultType="Article" parameterType="string">
+		SELECT
+			id,
+			author,
+			title,
+			modifytime,
+			createtime,
+			keyword,
+			tags,
+			context,
+			abstractContext,
+			readnum
+		FROM
+			article
+		WHERE
+			title=#{title}
+	</select>
+	<select id="getAll" resultType="Article" parameterType="int">
+		SELECT
+			id,
+			author,
+			title,
+			modifytime,
+			createtime,
+			keyword,
+			tags,
+			context,
+			abstractContext,
+			readnum
+		FROM
+			article
+	</select>
+	<select id="getByPage" resultType="Article" parameterType="int">
+		SELECT
+			id,
+			author,
+			title,
+			modifytime,
+			createtime,
+			keyword,
+			tags,
+			context,
+			abstractContext,
+			readnum
+		FROM
+			article 
+		ORDER BY 
+			id desc
+			LIMIT #{offset}, #{limit}
+	</select>
+	<select id="countAll" resultType="int">
+		SELECT 
+			COUNT(*)
+		FROM 
+			article
+	</select>
+	<select id="getNewArticle" resultType="Article">
+		SELECT
+			id,
+			author,
+			title,
+			'' modifytime,
+			createtime,
+			'' keyword,
+			'' tags,
+			'' context,
+			'' abstractContext,
+			'' readnum
+		FROM
+			article 
+		ORDER BY 
+			createtime desc
+			LIMIT #{offset}, #{limit}
+	</select>
+	<update id="readArticle" parameterType="int">
+		UPDATE 
+			article
+		SET 
+			readnum = readnum+1
+		WHERE
+			id = #{id}
+	</update>
+
+</mapper>

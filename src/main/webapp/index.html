@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Mosquito博客</title>
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width">
+<link rel="icon" href="img/logo.ico" type="img/x-ico" />
+<!-- Bootstrap styles -->
+<link rel="stylesheet" href="css/bootstrap.min.css">
+
+<!-- Font-Awesome -->
+<link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css">
+
+<!-- Styles -->
+<link rel="stylesheet" href="css/style.css" id="theme-styles">
+
+<!--[if lt IE 9]>      
+        <script src="js/respond.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+
+	<header>
+		<div class="widewrapper masthead">
+			<div class="container">
+				<a href="index.html" id="logo"> <img src="img/logo.png"
+					alt="clean Blog">
+				</a>
+
+				<div id="mobile-nav-toggle" class="pull-right">
+					<a href="#" data-toggle="collapse"
+						data-target=".clean-nav .navbar-collapse"> <i
+						class="fa fa-bars"></i>
+					</a>
+				</div>
+
+				<nav class="pull-right clean-nav">
+					<div class="collapse navbar-collapse">
+						<ul class="nav nav-pills navbar-nav">
+
+							<li><a href="index.html">主页</a></li>
+							<li><a href="about.html">关于</a></li>
+							<li><a href="contact.html">联系我</a></li>
+						</ul>
+					</div>
+				</nav>
+
+			</div>
+		</div>
+
+		<div class="widewrapper subheader">
+			<div class="container">
+				<div class="clean-breadcrumb">
+					<a href="#">博客</a>
+				</div>
+
+				<div class="clean-searchbox">
+					<form action="#" method="get" accept-charset="utf-8">
+						<input class="searchfield" id="searchbox" type="text"
+							placeholder="搜索内容">
+						<button class="searchbutton" type="submit">
+							<i class="fa fa-search"></i>
+						</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<div class="widewrapper main">
+		<div class="container">
+			<div class="row">
+				<div id="article_list" class="col-md-8 blog-main">
+					<!-- 这里显示博文list -->
+					
+				</div>
+				
+				<aside class="col-md-4 blog-aside">
+
+					<div class="aside-widget">
+						<header>
+							<h3>最新博文</h3>
+						</header>
+						<div class="body">
+							<ul id="newArticleList" class="clean-list">
+								<!-- 这里显示最新博文list -->
+							</ul>
+						</div>
+					</div>
+
+					<div class="aside-widget">
+						<header>
+							<h3>分类</h3>
+						</header>
+						<div class="body">
+							<ul class="clean-list">
+								<li><a href="">Clean - Responsive HTML5 Template</a></li>
+								<li><a href="">Responsive Pricing Table</a></li>
+								<li><a href="">Yellow HTML5 Template</a></li>
+								<li><a href="">Blackor Responsive Theme</a></li>
+								<li><a href="">Portfolio Bootstrap Template</a></li>
+								<li><a href="">Clean Slider Template</a></li>
+							</ul>
+						</div>
+					</div>
+
+					<div class="aside-widget">
+						<header>
+							<h3>标签</h3>
+						</header>
+						<div class="body clearfix">
+							<ul class="tags">
+								<li><a href="#">HTML5</a></li>
+								<li><a href="#">CSS3</a></li>
+								<li><a href="#">COMPONENTS</a></li>
+								<li><a href="#">TEMPLATE</a></li>
+								<li><a href="#">PLUGIN</a></li>
+								<li><a href="#">BOOTSTRAP</a></li>
+								<li><a href="#">TUTORIAL</a></li>
+								<li><a href="#">UI/UX</a></li>
+							</ul>
+						</div>
+					</div>
+				</aside>
+			</div>
+		</div>
+	</div>
+
+	<footer>
+		<div class="widewrapper footer">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4 footer-widget">
+						<h3>
+							<i class="fa fa-user"></i>关于
+						</h3>
+
+
+						<p>简单博客，不断完善</p>
+					</div>
+
+					<div class="col-md-4 footer-widget">
+						<h3>
+							<i class="fa fa-envelope"></i> 相关技术
+						</h3>
+						<ul class="clean-list">
+							<p>简洁 HTML5、SSM框架</p>
+
+						</ul>
+					</div>
+
+					<div class="col-md-4 footer-widget">
+						<h3>
+							<i class="fa fa-envelope"></i>联系我
+						</h3>
+
+						<p>相互学习、相互抄袭</p>
+						<div class="footer-widget-icon">
+							<i class="fa fa-facebook"></i><i class="fa fa-twitter"></i><i
+								class="fa fa-google"></i>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<div class="widewrapper copyright">Copyright &copy; 2017.Mosquito All rights reserved.</div>
+	</footer>
+
+	
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/modernizr.js"></script>
+	<script src="js/indexcontent.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			
+			getArticleList();
+			getNewArticleList();
+		});
+	</script>
+	
+</body>
+</html>
