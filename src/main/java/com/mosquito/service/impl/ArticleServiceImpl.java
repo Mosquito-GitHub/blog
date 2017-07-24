@@ -71,6 +71,30 @@ public class ArticleServiceImpl implements ArticleService{
 		}
 
 
+		public List<Article> getByClass(int classId, int offset, int limit) {
+			
+			return articleDao.getByClass(classId, offset, limit);
+		}
+
+
+		public List<Article> getByTag(String tags, int offset, int limit) {
+			
+			return articleDao.getByTag(tags, offset, limit);
+		}
+
+
+		public int countByClass(int classId) {
+			
+			return articleDao.countByClass(classId);
+		}
+
+
+		public int countByTag(String tags) {
+			
+			return articleDao.countByTag(tags);
+		}
+
+
 
 		
 }

@@ -10,49 +10,95 @@ public interface ArticleDao {
 
 	/**
 	 * 获取一篇文章
+	 * 
 	 * @param id
 	 * @return
 	 */
 	Article getById(@Param("articleId") int articleId);
+
 	/**
 	 * 获取一篇文章
+	 * 
 	 * @param id
 	 * @return
 	 */
 	Article getByTitle(@Param("title") String title);
+
 	/**
 	 * 获取所有文章
+	 * 
 	 * @return
 	 */
 	List<Article> getAll();
+
 	/**
 	 * 根据限制数量获取文章
+	 * 
 	 * @param offset
 	 * @param limit
 	 * @return
 	 */
 	List<Article> getByPage(@Param("offset") int offset, @Param("limit") int limit);
-	
+
+	/**
+	 * 根据分类获取文章
+	 * 
+	 * @param offset
+	 * @param limit
+	 * @return
+	 */
+	List<Article> getByClass(@Param("classId") int classId, @Param("offset") int offset, @Param("limit") int limit);
+
+	/**
+	 * 根据标签获取文章
+	 * 
+	 * @param offset
+	 * @param limit
+	 * @return
+	 */
+	List<Article> getByTag(@Param("tags") String tags, @Param("offset") int offset, @Param("limit") int limit);
+
 	/**
 	 * 获取最新文章列表
+	 * 
 	 * @param offset
 	 * @param limit
 	 * @return
 	 */
 	List<Article> getNewArticle(@Param("offset") int offset, @Param("limit") int limit);
-	/**
-	 * 阅读次数
-	 * @param id
-	 */
+
+	
 	/**
 	 * 获取文章总数
+	 * 
 	 * @return
 	 */
 	int countAll();
+
+	/**
+	 * 根据分类获取文章总数
+	 * 
+	 * @return
+	 */
+	int countByClass(@Param("classId") int classId);
+
+	/**
+	 * 根据标签获取文章总数
+	 * 
+	 * @return
+	 */
+	int countByTag(@Param("tags") String tags);
+
+	/**
+	 * 阅读次数
+	 * 
+	 * @param id
+	 */
 	void readArticle(@Param("id") int id);
-	
+
 	/**
 	 * 插入文章
+	 * 
 	 * @param author
 	 * @param title
 	 * @param modifytime
@@ -62,10 +108,14 @@ public interface ArticleDao {
 	 * @param content
 	 * @param abstractcontext
 	 */
-	void saveArticle(@Param("author")String author,@Param("title")String title,@Param("modifytime")String modifytime,@Param("createtime")String createtime,@Param("keyword")String keyword,@Param("tags")String tags,@Param("context")String context,@Param("abstractcontext")String abstractcontext);
-	
+	void saveArticle(@Param("author") String author, @Param("title") String title,
+			@Param("modifytime") String modifytime, @Param("createtime") String createtime,
+			@Param("keyword") String keyword, @Param("tags") String tags, @Param("context") String context,
+			@Param("abstractcontext") String abstractcontext);
+
 	/**
 	 * 更新文章
+	 * 
 	 * @param id
 	 * @param title
 	 * @param modifytime
@@ -75,5 +125,7 @@ public interface ArticleDao {
 	 * @param content
 	 * @param abstractcontext
 	 */
-	void updateArticle(@Param("id")int id,@Param("title")String title,@Param("modifytime")String modifytime,@Param("keyword")String keyword,@Param("tags")String tags,@Param("context")String context,@Param("abstractcontext")String abstractcontext);
+	void updateArticle(@Param("id") int id, @Param("title") String title, @Param("modifytime") String modifytime,
+			@Param("keyword") String keyword, @Param("tags") String tags, @Param("context") String context,
+			@Param("abstractcontext") String abstractcontext);
 }

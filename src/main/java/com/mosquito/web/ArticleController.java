@@ -46,16 +46,26 @@ public class ArticleController {
 	 * @return
 	 */
 	@RequestMapping("/getArticleList")
-	public @ResponseBody Map<String,Object> getByPage(HttpServletRequest request,HttpServletResponse response,int page,int pagecount){
+	public @ResponseBody Map<String,Object> getByPage(HttpServletRequest request,HttpServletResponse response,int page,int pagecount,String searchtype,String param){
 		Map<String,Object> map = new HashMap<String,Object>();
 		int offset = (page-1)*pagecount;
 		int limit = page*pagecount;
-		int count = articleService.countAll();
-		List<Article> list = articleService.getByPage(offset, limit);
-		//String json = JSON.toJSONString(list);
-		map.put("count", count);
+		List<Article> list=null;
+		char tp = searchtype.charAt(0);
+		switch(tp){
+			case 'c':
+				int classID = Integer.parseInt(param);
+				list = articleService.getByClass(classID, offset, limit);
+				break;
+			case 't':
+				list = articleService.getByTag(param, offset, limit);
+				break;
+			default:
+				list = articleService.getByPage(offset, limit);
+				
+		}
+		
 		map.put("list", list);
-		//System.out.println(list.get(3).toString());
 		return map;
 	}
 	
@@ -115,5 +125,30 @@ public class ArticleController {
 			articleService.updateArticle(article.getId(), title, modifytime, keywords, classify, content, abstractcontext);
 		}
 		return "success";
+	}
+	
+	/**
+	 * 获取博文列表总数
+	 * @return
+	 */
+	@RequestMapping("/getArticleCount")
+	public @ResponseBody Map<String,Object> getArticleCount(String searchtype,String param){
+		Map<String,Object> map = new HashMap<String,Object>();
+		int count = 0;
+		char tp = searchtype.charAt(0);
+		switch(tp){
+		case 'c':
+			int classID = Integer.parseInt(param);
+			count = articleService.countByClass(classID);
+			break;
+		case 't':
+			count = articleService.countByTag(param);
+			break;
+		default:
+			count = articleService.countAll();
+			
+	}
+	map.put("count", count);
+		return map;
 	}
 }

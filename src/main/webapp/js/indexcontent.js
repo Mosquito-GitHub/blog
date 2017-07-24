@@ -1,17 +1,16 @@
 /**
  * 这里组装网页里的内容
  */
-var page=1;// 当前页
-var pagenum=1;// 页面总数
+var currentPage=1;// 当前页
+var pageCount=1;// 页面总数
+var articleList='';
 
 // 分页按钮点击事件
-var selectPage = function(n){
-	if(page==n){
-		return;
-	}
-	page=n;
-	getArticleList();
+var selectPage = function(n,searchtype,searchparam){
+	currentPage=n;
+	getArticleList(searchtype,searchparam);
 }
+
 //选择评论的id
 var cmtid=0;
 var selectCommentId=function(id,commentid,category){
@@ -139,16 +138,15 @@ var showPage = function(id){
 // 获取数据成功回调函数
 // var success =
 // 获取数据
-var getArticleList = function(){
+var getArticleList = function(searchtype,searchparam){
+	
 	$.ajax({
 		type: "POST", 
 		url:"/myblog/article/getArticleList",
-		data:{page:page,pagecount:5},
+		data:{page:currentPage,pagecount:5,searchtype:searchtype,param:searchparam},
 		success:function(data){
-			//debugger;
 			$("#article_list").html("");// 清空info内容
-			var articleCount = data.count;
-			pagenum = Math.ceil(articleCount/5);
+			
 			$.each(data.list, function(i, item) {
 				$("#article_list").append(
 							"<div class='row' style=\"background-image: url('img/article_list_bg.PNG');\">"+
@@ -164,26 +162,36 @@ var getArticleList = function(){
 							"<div class='row'><br><br></div>"
 						);
 			});
-			var licontent="";
-			for(var i=1;i<= pagenum;i++){
-				licontent +="<li><a href='javascript:void(0);' onclick='selectPage("+i+")'>"+i+"</a></li>";
-			}
-			$("#article_list").append(
-					"<div class='row'>"+
-							"<nav aria-label='Page navigation'>"+
-							"<ul class='pagination'>"+
-								"<li><a href='#' aria-label='Previous'> <span aria-hidden='true'>&laquo;</span></a></li>"+
-								licontent+
-								"<li><a href='#' aria-label='Next'> <span aria-hidden='true'>&raquo;</span></a></li>"+
-							"</ul>"+
-							"</nav>"+
-							"</div>"
-					);
 		},
 		dataType:"json"
 		});
 }
-
+//分页功能
+var getPageList = function(searchtype,searchparam){
+	if(searchtype==null)
+		searchtype='a';
+	$.ajax({
+		  type: 'POST',
+		  url: "/myblog/article/getArticleCount",
+		  data:{searchtype:searchtype,param:searchparam},
+		  success: function(data){
+				var articleCount = data.count;
+				articleList = data.list;
+				pageCount = Math.ceil(articleCount/5);
+				selectPage(1,searchtype,searchparam);//显示第一页
+				$('#page_list').extendPagination({
+		            totalCount: articleCount,//总条数
+		            showCount: 10,//显示页的条数
+		            limit: 5,//每页显示条数
+		            callback: function (curr, limit, totalCount) {
+		            	selectPage(curr,searchtype,searchparam);
+		            }
+		        });
+		  },
+		  dataType: "json"
+		});
+	
+}
 var getNewArticleList=function(id){
 	$.ajax({
 		type:"POST", 

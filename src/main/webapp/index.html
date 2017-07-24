@@ -72,9 +72,14 @@
 	<div class="widewrapper main">
 		<div class="container">
 			<div class="row">
-				<div id="article_list" class="col-md-8 blog-main">
-					<!-- 这里显示博文list -->
+				<div  class="col-md-8 blog-main">
 					
+					<div id="article_list">
+						<!-- 这里显示博文list -->
+					</div>
+					<div id="page_list">
+						<!-- 这里显示翻页 -->
+					</div>
 				</div>
 				
 				<aside class="col-md-4 blog-aside">
@@ -96,12 +101,16 @@
 						</header>
 						<div class="body">
 							<ul class="clean-list">
-								<li><a href="">Clean - Responsive HTML5 Template</a></li>
-								<li><a href="">Responsive Pricing Table</a></li>
-								<li><a href="">Yellow HTML5 Template</a></li>
-								<li><a href="">Blackor Responsive Theme</a></li>
-								<li><a href="">Portfolio Bootstrap Template</a></li>
-								<li><a href="">Clean Slider Template</a></li>
+								<li><a href='javascript:void(0);' onclick="getPageList('c','1');">大数据</a></li>
+								<li><a href='javascript:void(0);' onclick="getPageList('c','2');">人工智能</a></li>
+								<li><a href='javascript:void(0);' onclick="getPageList('c','3');">机器学习</a></li>
+								<li><a href='javascript:void(0);' onclick="getPageList('c','4');">深度学习</a></li>
+								<li><a href='javascript:void(0);' onclick="getPageList('c','5');">Java</a></li>
+								<li><a href='javascript:void(0);' onclick="getPageList('c','6');">Python</a></li>
+								<li><a href='javascript:void(0);' onclick="getPageList('c','7');">Android</a></li>
+								<li><a href='javascript:void(0);' onclick="getPageList('c','8');">Web</a></li>
+								<li><a href='javascript:void(0);' onclick="getPageList('c','9');">Linux</a></li>
+								<li><a href='javascript:void(0);' onclick="getPageList('c','10');">云计算</a></li>
 							</ul>
 						</div>
 					</div>
@@ -112,14 +121,14 @@
 						</header>
 						<div class="body clearfix">
 							<ul class="tags">
-								<li><a href="#">HTML5</a></li>
-								<li><a href="#">CSS3</a></li>
-								<li><a href="#">COMPONENTS</a></li>
-								<li><a href="#">TEMPLATE</a></li>
-								<li><a href="#">PLUGIN</a></li>
-								<li><a href="#">BOOTSTRAP</a></li>
-								<li><a href="#">TUTORIAL</a></li>
-								<li><a href="#">UI/UX</a></li>
+								<li><a href='javascript:void(0);' onclick="getPageList('t','HTML5');">HTML5</a></li>
+								<li><a href='javascript:void(0);' onclick="getPageList('t','CSS3');">CSS3</a></li>
+								<li><a href='javascript:void(0);' onclick="getPageList('t','MySQL');">MySQL</a></li>
+								<li><a href='javascript:void(0);' onclick="getPageList('t','Hadoop');">Hadoop</a></li>
+								<li><a href='javascript:void(0);' onclick="getPageList('t','OpenStack');">OpenStack</a></li>
+								<li><a href='javascript:void(0);' onclick="getPageList('t','BOOTSTRAP');">BOOTSTRAP</a></li>
+								<li><a href='javascript:void(0);' onclick="getPageList('t','Spark');">Spark</a></li>
+								<li><a href='javascript:void(0);' onclick="getPageList('t','Linux');">Linux</a></li>
 							</ul>
 						</div>
 					</div>
@@ -173,11 +182,13 @@
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/modernizr.js"></script>
+	<script src="js/extendPagination.js"></script>
 	<script src="js/indexcontent.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
+			//获取分页列表并显示列表
+			getPageList();
 			
-			getArticleList();
 			getNewArticleList();
 		});
 	</script>

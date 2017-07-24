@@ -2,6 +2,8 @@ package com.mosquito.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.mosquito.entity.Article;
 
 public interface ArticleService {
@@ -35,6 +37,24 @@ public interface ArticleService {
 	 * 获取最新文章
 	 * @return
 	 */
+	
+	/**
+	 * 根据分类获取文章
+	 * @param offset
+	 * @param limit
+	 * @return
+	 */
+	List<Article> getByClass(int classId,int offset,int limit);
+	
+	/**
+	 * 根据标签获取文章
+	 * @param offset
+	 * @param limit
+	 * @return
+	 */
+	List<Article> getByTag(String tags,int offset,int limit);
+	
+	
 	List<Article> getNewArticle(int offset,int limit);
 	/**
 	 * 阅读次数
@@ -68,6 +88,21 @@ public interface ArticleService {
 	void updateArticle(int id,String title,String modifytime,String keyword,String tags,String content,String abstractcontext);
 	
 	int countAll();
+	
+	/**
+	 * 根据分类获取文章总数
+	 * 
+	 * @return
+	 */
+	int countByClass(int classId);
+
+	/**
+	 * 根据标签获取文章总数
+	 * 
+	 * @return
+	 */
+	int countByTag(String tags);
+
 	void readArticle(int id);
 	
 }

@@ -67,7 +67,6 @@
 			createtime,
 			keyword,
 			tags,
-			context,
 			abstractContext,
 			readnum
 		FROM
@@ -82,11 +81,48 @@
 			createtime,
 			keyword,
 			tags,
-			context,
 			abstractContext,
 			readnum
 		FROM
 			article 
+		ORDER BY 
+			id desc
+			LIMIT #{offset}, #{limit}
+	</select>
+	<select id="getByClass" resultType="Article">
+		SELECT
+			id,
+			author,
+			title,
+			modifytime,
+			createtime,
+			keyword,
+			tags,
+			abstractContext,
+			readnum
+		FROM
+			article 
+		WHERE
+			classID=#{classId}
+		ORDER BY 
+			id desc
+			LIMIT #{offset}, #{limit}
+	</select>
+	<select id="getByTag" resultType="Article">
+		SELECT
+			id,
+			author,
+			title,
+			modifytime,
+			createtime,
+			keyword,
+			tags,
+			abstractContext,
+			readnum
+		FROM
+			article 
+		WHERE
+			tags=#{tags}
 		ORDER BY 
 			id desc
 			LIMIT #{offset}, #{limit}
@@ -96,6 +132,22 @@
 			COUNT(*)
 		FROM 
 			article
+	</select>
+	<select id="countByClass" resultType="int">
+		SELECT 
+			COUNT(*)
+		FROM 
+			article
+		WHERE
+			classID=#{classId}
+	</select>
+	<select id="countByTag" resultType="int">
+		SELECT 
+			COUNT(*)
+		FROM 
+			article
+		WHERE
+			tags=#{tags}
 	</select>
 	<select id="getNewArticle" resultType="Article">
 		SELECT
