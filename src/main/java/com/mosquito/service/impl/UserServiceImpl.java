@@ -15,30 +15,30 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserDao userdao;
 
-	
+	@Override
 	public User getUserById(int id) {
 		return userdao.getUserById(id);
 	}
 
-	
+	@Override
 	public List<User> getAllUser() {
 		return userdao.getAllUser();
 	}
 
-	
+	@Override
 	public void addUser(String username, String email, String password, String rule, String headpic,
 			String selfintroduction) {
 		userdao.addUser(username, email, password, rule, headpic, selfintroduction);
 
 	}
 
-	
+	@Override
 	public void deleteUser(int id) {
 		userdao.deleteUser(id);
 
 	}
 
-	
+	@Override
 	public User getUserByName(String userName) {
 		
 		return userdao.getUserByName(userName);

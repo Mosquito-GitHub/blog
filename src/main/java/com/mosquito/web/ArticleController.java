@@ -46,10 +46,11 @@ public class ArticleController {
 	 * @return
 	 */
 	@RequestMapping("/getArticleList")
-	public @ResponseBody Map<String,Object> getByPage(HttpServletRequest request,HttpServletResponse response,int page,int pagecount,String searchtype,String param){
+	public @ResponseBody Map<String,Object> getByPage(HttpServletRequest request,HttpServletResponse response,Integer currentPage,String searchtype,String param){
 		Map<String,Object> map = new HashMap<String,Object>();
-		int offset = (page-1)*pagecount;
-		int limit = page*pagecount;
+		if(currentPage==null)currentPage=1;
+		int offset = (currentPage-1)*5;
+		int limit = currentPage*5;
 		List<Article> list=null;
 		char tp = searchtype.charAt(0);
 		switch(tp){
@@ -89,7 +90,7 @@ public class ArticleController {
 	 * @return
 	 */
 	@RequestMapping("/getArticle")
-	public @ResponseBody Map<String,Object> getCommentsByArticle(HttpServletRequest request,HttpServletResponse response,int articleid){
+	public @ResponseBody Map<String,Object> getCommentsByArticle(HttpServletRequest request,HttpServletResponse response,Integer articleid){
 		Map<String,Object> map = new HashMap<String,Object>();
 		String guestIp = request.getRemoteAddr();
 		Article article = articleService.getById(articleid);

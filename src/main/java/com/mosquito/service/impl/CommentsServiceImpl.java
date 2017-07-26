@@ -18,23 +18,23 @@ public class CommentsServiceImpl implements CommentsService{
 	@Autowired
 	private CommentsDao commdao;
 	
-	
+	@Override
 	public List<Comments> getAllComments() {
 		return commdao.getAllComments();
 	}
 
-	
+	@Override
 	public List<Comments> getCommentsById(int commentid) {
 		return commdao.getCommentsById(commentid);
 	}
 
-	
+	@Override
 	public void addComments(int commentid, int userid, String commtime, String content, String category) {
 		commdao.addComments(commentid, userid, commtime, content, category);
 		
 	}
 
-	
+	@Override
 	public void deleteComments(int id) {
 		commdao.deleteComments(id);
 		

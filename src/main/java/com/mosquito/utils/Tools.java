@@ -14,7 +14,7 @@ public class Tools {
 		for(int i=0;i<3;i++){
 			loc=content.indexOf("</p>",loc+4);
 		}
-		if(loc<300){
+		if(content.length()<300){
 			abstractcintent=content;
 		}else{
 			abstractcintent=content.substring(0, loc+4);

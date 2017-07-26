@@ -1,15 +1,6 @@
 /**
  * 这里组装网页里的内容
  */
-var currentPage=1;// 当前页
-var pageCount=1;// 页面总数
-var articleList='';
-
-// 分页按钮点击事件
-var selectPage = function(n,searchtype,searchparam){
-	currentPage=n;
-	getArticleList(searchtype,searchparam);
-}
 
 //选择评论的id
 var cmtid=0;
@@ -138,12 +129,11 @@ var showPage = function(id){
 // 获取数据成功回调函数
 // var success =
 // 获取数据
-var getArticleList = function(searchtype,searchparam){
-	
+var getArticleList = function(currentPage,searchtype,searchparam){
 	$.ajax({
 		type: "POST", 
 		url:"/myblog/article/getArticleList",
-		data:{page:currentPage,pagecount:5,searchtype:searchtype,param:searchparam},
+		data:{currentPage:currentPage,searchtype:searchtype,param:searchparam},
 		success:function(data){
 			$("#article_list").html("");// 清空info内容
 			
@@ -168,6 +158,7 @@ var getArticleList = function(searchtype,searchparam){
 }
 //分页功能
 var getPageList = function(searchtype,searchparam){
+	var currentPage=1;// 当前页
 	if(searchtype==null)
 		searchtype='a';
 	$.ajax({
@@ -178,13 +169,13 @@ var getPageList = function(searchtype,searchparam){
 				var articleCount = data.count;
 				articleList = data.list;
 				pageCount = Math.ceil(articleCount/5);
-				selectPage(1,searchtype,searchparam);//显示第一页
+				getArticleList(currentPage,searchtype,searchparam);//显示第一页
 				$('#page_list').extendPagination({
 		            totalCount: articleCount,//总条数
 		            showCount: 10,//显示页的条数
 		            limit: 5,//每页显示条数
 		            callback: function (curr, limit, totalCount) {
-		            	selectPage(curr,searchtype,searchparam);
+		            	getArticleList(curr,searchtype,searchparam);
 		            }
 		        });
 		  },
